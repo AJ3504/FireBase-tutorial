@@ -5,20 +5,20 @@ import { v4 as uuid } from "uuid";
 const ADD_TODO = "ADD_TODO";
 const DELETE_TODO = "DELETE_TODO";
 const TOGGLE_STATUS_TODO = "TOGGLE_STATUS_TODO";
-const GET_TODO_BY_ID = "GET_TODO_BY_ID";
+// const GET_TODO_BY_ID = "GET_TODO_BY_ID";
 
 //action creator
 export const addTodo = (payload) => {
   return { type: ADD_TODO, payload };
 };
-// export const deleteTodo = (payload) => {
-//   return { type: DELETE_TODO, payload };
-// };
-// export const toggleStatusTodo = (payload) => {
-//   return { type: TOGGLESTATUS_TODO, payload };
-// };
+export const deleteTodo = (todoId) => {
+  return { type: DELETE_TODO, todoId };
+};
+export const toggleStatusTodo = (todoId) => {
+  return { type: TOGGLE_STATUS_TODO, todoId };
+};
 // export const getTodoById = (payload) => {
-//   return { type: GETTODO_BYID, payload };
+//   return { type: GET_TODO_BY_ID, payload };
 // };
 
 //초기값
@@ -51,15 +51,26 @@ const todos = (state = initialState, action) => {
       };
 
     //
-    // case DELETE_TODO: filter
-    //   return {};
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.todoId),
+      };
 
-    // case TOGGLE_STATUS_TODO: map
-    //   return {};
+    //
+    case TOGGLE_STATUS_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.todoId ? { ...todo, isDone: !todo.isDone } : todo
+        ),
+      };
 
+    //
     // case GET_TODO_BY_ID:
     //   return {};
 
+    //
     default:
       return state;
   }
