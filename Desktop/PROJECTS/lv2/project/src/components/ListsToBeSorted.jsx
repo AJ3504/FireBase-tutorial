@@ -5,6 +5,7 @@ import { deleteTodo, toggleStatusTodo } from "redux/modules/todos";
 
 //
 import { Link } from "react-router-dom";
+import Details from "pages/Details";
 
 export const ListsToBeSorted = () => {
   const todos = useSelector((state) => state.todos.todos);

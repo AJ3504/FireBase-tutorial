@@ -17,8 +17,8 @@ export const deleteTodo = (todoId) => {
 export const toggleStatusTodo = (todoId) => {
   return { type: TOGGLE_STATUS_TODO, todoId };
 };
-// export const getTodoById = (payload) => {
-//   return { type: GET_TODO_BY_ID, payload };
+// export const getTodoById = (id) => {
+//   return { type: GET_TODO_BY_ID, payload: id };
 // };
 
 //초기값
@@ -37,6 +37,7 @@ const initialState = {
       isDone: true,
     },
   ],
+  selectedTodo: null,
 };
 
 //reducer
@@ -68,7 +69,12 @@ const todos = (state = initialState, action) => {
 
     //
     // case GET_TODO_BY_ID:
-    //   return {};
+    //   const todoId = action.id;
+    //   const selectedTodo = state.todos.find((todo) => todo.id === todoId);
+    //   return {
+    //     ...state,
+    //     selectedTodo,
+    //   };
 
     //
     default:
